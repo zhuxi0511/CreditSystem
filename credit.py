@@ -5,7 +5,7 @@ from model.panel import PanelManager
 from model.login import Login
 from model.message import Message
 from model.apply import Apply
-from model.people import People
+from model.people import People, PeopleInformationToplevel
 from model.model import init
 from model import const
 
@@ -16,6 +16,7 @@ def credit():
     root.option_add("*Font", "helvetica -12")
     login = Login(master=root)
     login.pack()
+    #p = PeopleInformationToplevel()
 
     people = People(master=root)
     message = Message(master=root)

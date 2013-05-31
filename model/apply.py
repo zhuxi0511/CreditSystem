@@ -3,7 +3,7 @@
 import Tkinter
 from Tkinter import Frame, Button, LabelFrame, Listbox, Label, StringVar
 from util import Input, Show_style, Text_input
-from people import People_list
+from people import PeopleList
 
 class Apply(Show_style):
     def __init__(self, master=None):
@@ -29,15 +29,14 @@ class Apply(Show_style):
         self.sidebar_frame.pack(side=Tkinter.LEFT, fill=Tkinter.Y)
 
     def create_widget(self):
-        self.people_list_frame = People_list(self, title='请选择一个现有客户或录入一个新客户')
+        def apply_func():
+            self.people_list_frame.forget()
+            self.apply_information_frame = Apply_information(self)
+            self.apply_information_frame.pack()
+
+        self.people_list_frame = PeopleList(self, title='请选择一个现有客户或录入一个新客户', apply_func)
         self.people_list_frame['pady'] = 10
         self.people_list_frame.pack()
-
-"""
-        self.people_list_frame.forget()
-        self.apply_information_frame = Apply_information(self)
-        self.apply_information_frame.pack()
-        """
 
 class Apply_information(Frame):
     def __init__(self, master=None):
