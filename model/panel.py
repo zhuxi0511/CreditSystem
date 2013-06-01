@@ -15,6 +15,7 @@ class PanelManager:
         fr.forget()
         if (isinstance(to, str)):
             to = self.get_panel(to)
+        to.refresh_mutilistbox()
         to.pack()
 
     def get_panel(self, s):

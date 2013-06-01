@@ -73,6 +73,9 @@ class Show_style(Frame):
         self.title_label['font'] = 'Helvetica -32'
         self.title_label.pack()
 
+    def refresh_mutilistbox(self):
+        pass
+
     def add_status(self):
         self.status_frame = Status(self)
         self.status_frame['relief'] = 'groove'
