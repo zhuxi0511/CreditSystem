@@ -2,7 +2,7 @@
 
 import Tkinter
 from Tkinter import Frame, Button, LabelFrame, Listbox, Label, StringVar
-from util import Input, Show_style, Text_input
+from util import Input, Show_style, Text_input, MessageBox
 from people import PeopleList
 
 class Apply(Show_style):
@@ -38,6 +38,7 @@ class Apply(Show_style):
             self.people_list_frame.forget()
             self.apply_information_frame = Apply_information(self)
             self.apply_information_frame.people_name.set(people_information[0])
+            self.apply_information_frame.people_information = people_information
             self.apply_information_frame.pack()
 
         self.people_list_frame = PeopleList(self, title='请选择一个现有客户或录入一个新客户', next_func=apply_func)
@@ -47,6 +48,7 @@ class Apply(Show_style):
 class Apply_information(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
+        self.people_information = None
         self.number = StringVar()
         self.product_name = StringVar()
         self.people_number = StringVar()
