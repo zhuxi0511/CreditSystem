@@ -87,7 +87,8 @@ class Apply_information(Frame):
         information_list.append(self.end_date.get())
         information_list.append(self.limit.get())
         information_list.append(self.rate.get())
-        information_list.append(const.user_type)
+        print const.user_type
+        information_list.append(str(int(const.user_type) + 1))
         return information_list
 
     def fill_application_information(self):
