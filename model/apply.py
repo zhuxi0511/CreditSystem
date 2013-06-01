@@ -129,11 +129,13 @@ class ApplyConfirm(Frame):
 
     def create_widget(self):
         self.title_label = Label(self, text='确定要提交这个申请给上级审核?')
-        self.title_label['width'] = 20
+        self.title_label['width'] = 60
         self.confirm_button = Button(self, text='确认')
         def confirm_func():
             if save_apply_information(self.apply_information):
-                MessageBox('提交成功', '提交成功')
+                MessageBox('提交成功', '提交成功, 可以去消息中心查看审核情况')
+                self.master.apply_confirm_frame.destroy()
+                self.master.people_list_frame.pack()
             else:
                 MessageBox('提交失败', '出问题拉')
         self.confirm_button['command'] = confirm_func

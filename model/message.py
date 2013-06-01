@@ -1,8 +1,10 @@
 #coding:utf-8
 
 import Tkinter
+import const
 from Tkinter import Button, LabelFrame, Listbox
-from util import Input, Show_style, MultiListbox
+from util import Input, Show_style
+from multilistbox import MultiListbox
 
 class Message(Show_style):
     def __init__(self, master=None):
@@ -13,7 +15,6 @@ class Message(Show_style):
 
     def create_widget(self):
         self.create_main_frame()
-
 
     def create_main_frame(self):
         self.main_labelframe = LabelFrame(self, text='消息中心')
@@ -27,12 +28,13 @@ class Message(Show_style):
         #TODO confirm command function
         self.check_button = Button(self.main_labelframe, text='察看')
         self.check_button['command'] = None
-        self.check.pack()
+        self.check_button.grid(pady=10, row=1, column=1)
         self.submit_apply_button = None
         if (const.user_type < 4):
             self.submit_apply_button = Button(self.main_labelframe, text='通过并提交上级审核')
         else:
             self.submit_apply_button = Button(self.main_labelframe, text='通过审核')
+        self.submit_apply_button.grid(pady=10, row=1, column=2)
 
 
     def pack_all(self):
