@@ -1,9 +1,11 @@
 #coding:utf-8
 
 import Tkinter
+import const
 from Tkinter import Frame, Button, LabelFrame, Listbox, Label, StringVar
 from util import Input, Show_style, Text_input, MessageBox
 from people import PeopleList
+from model import save_apply_information
 
 class Apply(Show_style):
     def __init__(self, master=None):
@@ -30,14 +32,17 @@ class Apply(Show_style):
 
     def create_widget(self):
         def apply_func():
-            people_information = self.people_list_frame.get_mutilistbox_choose()
-            print people_information
-            if not people_information:
+            tmp = self.people_list_frame.get_mutilistbox_choose()
+            if not tmp:
                 MessageBox('当前用户', '请先选中一个用户')
                 return
+            people_information, number = tmp
+            print people_information
             self.people_list_frame.forget()
             self.apply_information_frame = Apply_information(self)
             self.apply_information_frame.people_name.set(people_information[0])
+            self.apply_information_frame.people_number.set(str(1000001+number))
+            self.apply_information_frame.number.set(str(100000001+len(const.apply_information_list)))
             self.apply_information_frame.people_information = people_information
             self.apply_information_frame.pack()
 
@@ -66,6 +71,24 @@ class Apply_information(Frame):
         self.fill_application_information()
 
     def get_information(self):
+        print len(self.people_information)
+        information_list = []
+        information_list.extend(self.people_information)
+        information_list.append(self.number.get())
+        information_list.append(self.product_name.get())
+        information_list.append(self.people_number.get())
+        information_list.append(self.people_name.get())
+        information_list.append(self.intent.get())
+        information_list.append(self.rent_from.get())
+        information_list.append(self.aim_to_subject.get())
+        information_list.append(self.money_type.get())
+        information_list.append(self.money_count.get())
+        information_list.append(self.start_date.get())
+        information_list.append(self.end_date.get())
+        information_list.append(self.limit.get())
+        information_list.append(self.rate.get())
+        information_list.append(const.user_type)
+        return information_list
 
     def fill_application_information(self):
         Input(self, '业务编号', self.number).grid(pady=5, row=0, column=0)
@@ -79,16 +102,47 @@ class Apply_information(Frame):
         Input(self, '贷款投向行业', self.aim_to_subject).grid(pady=5, row=5)
         Input(self, '发放日期', self.start_date).grid(pady=5, row=6, column=0)
         Input(self, '到期日期', self.end_date).grid(pady=5, row=6, column=1)
-        Input(self, '期限', self.limit).grid(pady=5, row=6, column=0)
-        Input(self, '利率', self.rate).grid(pady=5, row=6, column=0)
+        Input(self, '期限', self.limit).grid(pady=5, row=7, column=0)
+        Input(self, '利率', self.rate).grid(pady=5, row=7, column=1)
         self.confirm_button = Button(self, text='确认')
         def confirm_func():
-            save_apply_information(self.get_information())
-            pass
-        self.confirm_button.grid(row=7, column=0)
+            apply_information = self.get_information()
+            self.master.apply_information_frame.forget()
+            self.master.apply_confirm_frame = ApplyConfirm(self.master, apply_information)
+            self.master.apply_confirm_frame.pack()
+        self.confirm_button['command'] = confirm_func
+        self.confirm_button.grid(row=8, column=0)
         self.cancel_button= Button(self, text='取消')
         def cancel_func():
             self.master.apply_information_frame.destroy()
             self.master.people_list_frame.pack()
         self.cancel_button['command'] = cancel_func
-        self.cancel_button.grid(row=7, column=1)
+        self.cancel_button.grid(row=8, column=1)
+
+class ApplyConfirm(Frame):
+    def __init__(self, master=None, apply_information=None):
+        Frame.__init__(self, master)
+        self.apply_information = apply_information
+        self.create_widget()
+        self.packall()
+
+    def create_widget(self):
+        self.title_label = Label(self, text='确定要提交这个申请给上级审核?')
+        self.title_label['width'] = 20
+        self.confirm_button = Button(self, text='确认')
+        def confirm_func():
+            if save_apply_information(self.apply_information):
+                MessageBox('提交成功', '提交成功')
+            else:
+                MessageBox('提交失败', '出问题拉')
+        self.confirm_button['command'] = confirm_func
+        self.cancel_button = Button(self, text='取消')
+        def cancel_func():
+            self.master.apply_confirm_frame.destroy()
+            self.master.apply_information_frame.pack()
+        self.cancel_button['command'] = cancel_func
+
+    def packall(self):
+        self.title_label.grid(pady=5, row=1, column=0, columnspan=2)
+        self.confirm_button.grid(pady=20, row=2, column=0)
+        self.cancel_button.grid(pady=20, row=2, column=1)

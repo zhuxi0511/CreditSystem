@@ -51,9 +51,8 @@ class PeopleList(Frame):
         if not now:
             return None
         else:
-            return const.people_information_list[int(now[0])]
+            return (const.people_information_list[int(now[0])], int(now[0]))
 
-        
     def create_mutilistbox(self, mutilistbox_items):
         self.people_mutilistbox = MultiListbox(self, mutilistbox_items)
         self.people_mutilistbox['width'] = 200

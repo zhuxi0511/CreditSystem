@@ -71,6 +71,7 @@ def save_people_information(people_information):
             if l == '':
                 tmp[j][i] = '#'
     f.writelines(map(lambda x:'\t'.join(x) + '\n', tmp))
+    return True
 
 def save_apply_information(apply_information):
     const.apply_information_list.append(apply_information)
@@ -82,6 +83,7 @@ def save_apply_information(apply_information):
             if l == '':
                 tmp[j][i] = '#'
     f.writelines(map(lambda x:'\t'.join(x) + '\n', tmp))
+    return True
 
 def show_people_list():
     people_list = []
