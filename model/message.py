@@ -2,7 +2,7 @@
 
 import Tkinter
 from Tkinter import Button, LabelFrame, Listbox
-from util import Input, Show_style
+from util import Input, Show_style, MultiListbox
 
 class Message(Show_style):
     def __init__(self, master=None):
@@ -12,7 +12,7 @@ class Message(Show_style):
 
     def create_widget(self):
         self.main_labelframe = LabelFrame(self, text='消息中心')
-        self.main_list = Listbox(self.main_labelframe, height=22, width=100)
+        self.main_list = MultiListbox(self.main_labelframe, height=22, width=100)
         self.main_list['selectmode']=Tkinter.BROWSE
         self.main_list.pack(padx=10, pady=10)
         self.main_list.insert(1,'asdfa')

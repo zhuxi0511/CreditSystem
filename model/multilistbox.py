@@ -1,13 +1,13 @@
 from Tkinter import *
 
 class MultiListbox(Frame):
-    def __init__(self, master, lists):
+    def __init__(self, master, lists, height=20):
 	Frame.__init__(self, master, borderwidth=1, relief=GROOVE)
 	self.lists = []
 	for l,w in lists:
 	    frame = Frame(self); frame.pack(side=LEFT, expand=YES, fill=BOTH)
 	    Label(frame, text=l, borderwidth=1, relief=RAISED).pack(fill=X)
-	    lb = Listbox(frame, width=w, height=20, selectborderwidth=0,
+	    lb = Listbox(frame, width=w, height=height, selectborderwidth=0,
 			 relief=FLAT, exportselection=FALSE)
 	    lb.pack(expand=YES, fill=BOTH)
 	    self.lists.append(lb)
@@ -94,3 +94,4 @@ if __name__ == '__main__':
         mlb.insert(END, ('Important Message: %d' % i, 'John Doe', '10/10/%04d' % (1900+i)))
     mlb.pack(expand=YES,fill=BOTH)
     tk.mainloop()
+

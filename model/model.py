@@ -77,7 +77,7 @@ def save_apply_information(apply_information):
     const.apply_information_list.append(apply_information)
     f = open('data/apply', 'w')
     print 'apply list:', const.apply_information_list
-    tmp = deepcopy(const.people_information_list)
+    tmp = deepcopy(const.apply_information_list)
     for j, line in enumerate(tmp):
         for i, l in enumerate(line):
             if l == '':
