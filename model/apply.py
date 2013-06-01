@@ -54,26 +54,37 @@ class Apply_information(Frame):
         self.people_number = StringVar()
         self.people_name = StringVar()
         self.intent = StringVar()
-        self.intent_explain = StringVar()
         self.rent_from = StringVar()
         self.aim_to_subject = StringVar()
         self.money_type = StringVar()
-        self.date = StringVar()
+        self.money_count = StringVar()
+        self.start_date = StringVar()
+        self.end_date = StringVar()
+        self.limit = StringVar()
+        self.rate = StringVar()
 
         self.fill_application_information()
+
+    def get_information(self):
 
     def fill_application_information(self):
         Input(self, '业务编号', self.number).grid(pady=5, row=0, column=0)
         Input(self, '产品名称', self.product_name).grid(pady=5, row=0, column=1)
         Input(self, '客户编号', self.people_number).grid(pady=5, row=1, column=0)
         Input(self, '客户名称', self.people_name).grid(pady=5, row=1, column=1)
-        Input(self, '借款用途', self.intent).grid(pady=5, row=2)
-        Text_input(self, '借款用途说明', self.intent_explain).grid(pady=5, row=3, columnspan=2)
+        Input(self, '贷款金额', self.money_count).grid(pady=5, row=2, column=0)
+        Input(self, '币种', self.money_type).grid(pady=5, row=2, column=1)
+        Text_input(self, '用途说明', self.intent).grid(pady=5, row=3, columnspan=2)
         Text_input(self, '还款来源', self.rent_from).grid(pady=5, row=4, columnspan=2)
         Input(self, '贷款投向行业', self.aim_to_subject).grid(pady=5, row=5)
-        Input(self, '币种', self.money_type).grid(pady=5, row=6, column=1)
-        Input(self, '日期', self.date).grid(pady=5, row=6, column=0)
+        Input(self, '发放日期', self.start_date).grid(pady=5, row=6, column=0)
+        Input(self, '到期日期', self.end_date).grid(pady=5, row=6, column=1)
+        Input(self, '期限', self.limit).grid(pady=5, row=6, column=0)
+        Input(self, '利率', self.rate).grid(pady=5, row=6, column=0)
         self.confirm_button = Button(self, text='确认')
+        def confirm_func():
+            save_apply_information(self.get_information())
+            pass
         self.confirm_button.grid(row=7, column=0)
         self.cancel_button= Button(self, text='取消')
         def cancel_func():

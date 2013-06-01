@@ -1,6 +1,7 @@
 #coding:utf-8
 
 import Tkinter
+import const
 from Tkinter import Frame, Button, LabelFrame, Listbox, Label, Toplevel, StringVar
 from util import Input, Text_input, Show_style, MessageBox
 from multilistbox import MultiListbox
@@ -50,7 +51,7 @@ class PeopleList(Frame):
         if not now:
             return None
         else:
-            return self.people_mutilistbox.get(now)
+            return const.people_information_list[int(now[0])]
 
         
     def create_mutilistbox(self, mutilistbox_items):
@@ -59,7 +60,6 @@ class PeopleList(Frame):
         self.people_mutilistbox['height'] = 100
         self.refresh_mutilistbox()
 
-    #TODO
     def create_button(self):
         self.add_people_button = Button(self, text='增加新客户')
         self.add_people_button['command'] = lambda: PeopleInformationToplevel(self)

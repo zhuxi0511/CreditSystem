@@ -16,6 +16,12 @@ def init():
     else:
         print 'login people file error'
         raise Exception()
+    f = open('data/apply')
+    if f:
+        const.apply_information_list = get_apply_list(f.readlines())
+    else:
+        print 'login people file error'
+        raise Exception()
 
 def login_model(user, password):
     user = user.strip()
@@ -43,12 +49,33 @@ def get_people_list(lines):
         people_information_list.append(line)
     return people_information_list
 
+def get_apply_list(lines):
+    apply_information_list = []
+    for line in lines:
+        line = line.strip().split('\t')
+        for i, l in enumerate(line):
+            if l == '#':
+                line[i] = ''
+        apply_information_list.append(line)
+    return apply_information_list
+
 def save_people_information(people_information):
     const.people_information_list.append(people_information)
     f = open('data/people', 'w')
-    print const.people_information_list
+    print 'people list:', const.people_information_list
     print type(const.people_information_list)
     print people_information
+    tmp = deepcopy(const.people_information_list)
+    for j, line in enumerate(tmp):
+        for i, l in enumerate(line):
+            if l == '':
+                tmp[j][i] = '#'
+    f.writelines(map(lambda x:'\t'.join(x) + '\n', tmp))
+
+def save_apply_information(apply_information):
+    const.apply_information_list.append(apply_information)
+    f = open('data/apply', 'w')
+    print 'apply list:', const.apply_information_list
     tmp = deepcopy(const.people_information_list)
     for j, line in enumerate(tmp):
         for i, l in enumerate(line):
