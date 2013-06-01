@@ -2,7 +2,7 @@
 
 import Tkinter
 from Tkinter import Frame, Button, LabelFrame, Listbox, Label, Toplevel, StringVar
-from util import Input, Text_input, Show_style
+from util import Input, Text_input, Show_style, MessageBox
 from multilistbox import MultiListbox
 from model import save_people_information, show_people_list
 
@@ -44,6 +44,14 @@ class PeopleList(Frame):
         people_list = show_people_list()
         for p in people_list:
             self.people_mutilistbox.insert(Tkinter.END, p)
+
+    def get_mutilistbox_choose(self):
+        now = self.people_mutilistbox.curselection()
+        if not now:
+            return None
+        else:
+            return self.people_mutilistbox.get(now)
+
         
     def create_mutilistbox(self, mutilistbox_items):
         self.people_mutilistbox = MultiListbox(self, mutilistbox_items)

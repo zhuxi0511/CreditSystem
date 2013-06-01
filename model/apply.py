@@ -30,11 +30,17 @@ class Apply(Show_style):
 
     def create_widget(self):
         def apply_func():
+            people_information = self.people_list_frame.get_mutilistbox_choose()
+            print people_information
+            if not people_information:
+                MessageBox('当前用户', '请先选中一个用户')
+                return
             self.people_list_frame.forget()
             self.apply_information_frame = Apply_information(self)
+            self.apply_information_frame.people_name.set(people_information[0])
             self.apply_information_frame.pack()
 
-        self.people_list_frame = PeopleList(self, title='请选择一个现有客户或录入一个新客户', apply_func)
+        self.people_list_frame = PeopleList(self, title='请选择一个现有客户或录入一个新客户', next_func=apply_func)
         self.people_list_frame['pady'] = 10
         self.people_list_frame.pack()
 
@@ -60,10 +66,16 @@ class Apply_information(Frame):
         Input(self, '客户编号', self.people_number).grid(pady=5, row=1, column=0)
         Input(self, '客户名称', self.people_name).grid(pady=5, row=1, column=1)
         Input(self, '借款用途', self.intent).grid(pady=5, row=2)
-        Text_input(self, '借款用途说明', self.intent_explain).grid(pady=5, row=3, columnspan=3)
+        Text_input(self, '借款用途说明', self.intent_explain).grid(pady=5, row=3, columnspan=2)
         Text_input(self, '还款来源', self.rent_from).grid(pady=5, row=4, columnspan=2)
         Input(self, '贷款投向行业', self.aim_to_subject).grid(pady=5, row=5)
         Input(self, '币种', self.money_type).grid(pady=5, row=6, column=1)
         Input(self, '日期', self.date).grid(pady=5, row=6, column=0)
         self.confirm_button = Button(self, text='确认')
-        self.confirm_button.grid(columnspan=2)
+        self.confirm_button.grid(row=7, column=0)
+        self.cancel_button= Button(self, text='取消')
+        def cancel_func():
+            self.master.apply_information_frame.destroy()
+            self.master.people_list_frame.pack()
+        self.cancel_button['command'] = cancel_func
+        self.cancel_button.grid(row=7, column=1)
