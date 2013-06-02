@@ -130,6 +130,7 @@ class ApplyConfirm(Frame):
     def create_widget(self):
         self.title_label = Label(self, text='确定要提交这个申请给上级审核?')
         self.title_label['width'] = 60
+        self.apply_sheet_frame = ApplySheetFrame(self, self.apply_information)
         self.confirm_button = Button(self, text='确认')
         def confirm_func():
             if save_apply_information(self.apply_information):

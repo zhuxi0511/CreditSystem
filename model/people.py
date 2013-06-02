@@ -30,7 +30,7 @@ class PeopleList(Frame):
         self.create_explain_label()
         self.create_mutilistbox(self.mutilistbox_items)
         self.create_button()
-        self.packall()
+        self.pack_all()
 
     def create_explain_label(self):
         self.explain_label = Label(self, text=self.title)
@@ -68,7 +68,7 @@ class PeopleList(Frame):
             self.next_func_button = Button(self, text='填写申请')
             self.next_func_button['command'] = self.next_func
 
-    def packall(self):
+    def pack_all(self):
         self.explain_label.pack()
         self.people_mutilistbox.pack(fill=Tkinter.BOTH)
         self.confirm_button.pack(side=Tkinter.RIGHT)

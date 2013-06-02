@@ -21,7 +21,7 @@ class Message(Show_style):
 
     def create_main_frame(self):
         self.main_labelframe = LabelFrame(self, text='消息中心')
-        self.main_list_item = (('业务编号',10),('客户编号',10),('客户名称',25),('发放日',10),('到期日',10),('贷款金额',5),('产品名称',10),('期限', 5),('利率',10), ('申请状态', 16))
+        self.main_list_item = (('业务编号',10),('客户编号',8),('客户名称',20),('发放日',10),('到期日',10),('贷款金额',5),('产品名称',10),('期限', 5),('利率',10), ('申请状态', 16))
         self.main_list = MultiListbox(self.main_labelframe, self.main_list_item, height=22)
         self.main_list.grid(padx=10, pady=10, row=0, column=0)
 
@@ -93,7 +93,7 @@ class ApplyInformationToplevel(Toplevel):
 
     def pack_all(self):
         self.apply_state_label.grid(pady=20, row=0, column=0, columnspan=2)
-        self.apply_sheet_frame.grid(pady=5, row=1, column=0, columnspan=2)
+        self.apply_sheet_frame.grid(pady=5, padx=10, row=1, column=0, columnspan=2)
         if '等待当前用户审核' == self.get_state():
             self.submit_apply_button.grid(pady=5, row=2, column=0)
             self.confirm_button.grid(pady=5, row=2, column=1)
