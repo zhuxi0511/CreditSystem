@@ -6,6 +6,7 @@ from Tkinter import Frame, Button, LabelFrame, Listbox, Label, StringVar
 from util import Input, Show_style, Text_input, MessageBox
 from people import PeopleList
 from model import save_apply_information
+from applysheet import ApplySheetFrame
 
 class Apply(Show_style):
     def __init__(self, master=None):
@@ -147,6 +148,7 @@ class ApplyConfirm(Frame):
         self.cancel_button['command'] = cancel_func
 
     def packall(self):
-        self.title_label.grid(pady=5, row=1, column=0, columnspan=2)
+        self.title_label.grid(pady=5, row=0, column=0, columnspan=2)
+        self.apply_sheet_frame.grid(pady=5, row=1, column=0, columnspan=2)
         self.confirm_button.grid(pady=20, row=2, column=0)
         self.cancel_button.grid(pady=20, row=2, column=1)

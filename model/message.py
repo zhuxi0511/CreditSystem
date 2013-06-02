@@ -93,12 +93,12 @@ class ApplyInformationToplevel(Toplevel):
 
     def pack_all(self):
         self.apply_state_label.grid(pady=20, row=0, column=0, columnspan=2)
-        self.apply_sheet_frame.grid(pady=5, padx=10, row=1, column=0, columnspan=2)
+        self.apply_sheet_frame.grid(pady=5, padx=20, row=1, column=0, columnspan=2)
         if '等待当前用户审核' == self.get_state():
             self.submit_apply_button.grid(pady=5, row=2, column=0)
-            self.confirm_button.grid(pady=5, row=2, column=1)
+            self.confirm_button.grid(pady=10, row=2, column=1)
         else:
-            self.confirm_button.grid(pady=5, row=2, column=0, columnspan=2)
+            self.confirm_button.grid(pady=10, row=2, column=0, columnspan=2)
 
     def get_state(self):
         ret = None
