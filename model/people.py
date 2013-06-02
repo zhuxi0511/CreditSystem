@@ -77,7 +77,7 @@ class PeopleList(Frame):
             self.next_func_button.pack(side=Tkinter.LEFT)
 
 class PeopleInformationToplevel(Toplevel):
-    def __init__(self, father, title='添加客户信息'):
+    def __init__(self, master , title='添加客户信息'):
         Toplevel.__init__(self)
         self.name = StringVar()
         self.people_type = StringVar()
@@ -94,7 +94,7 @@ class PeopleInformationToplevel(Toplevel):
         self.tex_code = StringVar()
         self.tex_type = StringVar()
         self.tex_data = StringVar()
-        self.father = father
+        self.master = master
         self.title(title)
         self.create_widget()
         self.pack_all()
@@ -128,7 +128,7 @@ class PeopleInformationToplevel(Toplevel):
         self.confirm_button = Button(self, text='确定')
         def confirm_button_func():
             save_people_information(self.get_information())
-            self.father.refresh_mutilistbox()
+            self.master.refresh_mutilistbox()
             self.destroy()
         self.confirm_button['command'] = confirm_button_func
         self.cancel_button = Button(self, text='取消')

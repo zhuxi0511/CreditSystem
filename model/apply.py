@@ -133,7 +133,7 @@ class ApplyConfirm(Frame):
         self.confirm_button = Button(self, text='确认')
         def confirm_func():
             if save_apply_information(self.apply_information):
-                MessageBox('提交成功', '提交成功, 可以去消息中心查看审核情况')
+                MessageBox('提交成功', '提交成功, 可以去消息中心查看')
                 self.master.apply_confirm_frame.destroy()
                 self.master.people_list_frame.pack()
             else:
