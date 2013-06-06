@@ -150,7 +150,7 @@ class PeopleInformationToplevel(Toplevel):
         self.company_address_input.grid(row=8, pady=5, column=0, columnspan=2)
         Input(self, '注册本金币种', self.money_type).grid(row=9, pady=5, column=0)
         Input(self, '注册资本', self.money_count).grid(row=9, pady=5, column=1)
-        Text_input(self, '经营范围', self.company_range).grid(row=10, pady=5, column=0, columnspan=2)
+        Input(self, '经营范围', self.company_range, is_big=True).grid(row=10, pady=5, column=0, columnspan=2)
         Label(self, text='税务信息', anchor='w', width=35).grid(row=11, column=0, pady=10)
         Input(self, '税务登记证件类型', self.tex_type).grid(row=12, pady=5, column=0)
         Input(self, '税务登记证号', self.tex_code).grid(row=12, pady=5, column=1)

@@ -96,5 +96,5 @@ def show_apply_list():
     apply_list = []
     for line in const.apply_information_list:
         print line
-        apply_list.append([line[15], line[17], line[0], line[23], line[24], line[25], line[16], line[26], line[27], line[-1]])
+        apply_list.append([line[15], line[17], line[0], line[24], line[25], line[23], line[16], line[26], line[27], line[-1]])
     return apply_list

@@ -26,9 +26,10 @@ class MessageBox(Toplevel):
         self.ok_button.grid(pady=5, row=1)
 
 class Input(Frame):
-    def __init__(self, master=None, text='', textvariable=None):
+    def __init__(self, master=None, text='', textvariable=None, is_big=False):
         Frame.__init__(self, master)
         self.text = text
+        self.is_big = is_big
         self.textvariable = textvariable
         self.create_widget()
 
@@ -44,6 +45,8 @@ class Input(Frame):
 
     def create_entry(self, textvariable):
         self.entry = Entry(self, textvariable=textvariable)
+        if self.is_big:
+            self.entry['width'] = 60 
 
     def pack_all(self):
         self.text_label.pack(side=Tkinter.LEFT)
