@@ -1,5 +1,6 @@
 #coding: utf-8
 
+import sys
 import Tkinter
 from model.panel import PanelManager
 from model.login import Login
@@ -27,6 +28,8 @@ def credit():
 
 
 def main():
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     init()
     credit()
 
