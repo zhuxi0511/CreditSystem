@@ -24,9 +24,10 @@ class Login(Show_style):
             if good:
                 const.user_type = user_type
                 const.user_name = self.user.get()
-                self.panel_manager.people.status_frame.set_status_text((const.user_name, '客户信息'))
-                self.panel_manager.message.status_frame.set_status_text((const.user_name, '消息中心'))
-                self.panel_manager.applys.status_frame.set_status_text((const.user_name, '放款申请'))
+                client_type = ['', '信贷员', '主管', '副行长', '行长']
+                self.panel_manager.people.status_frame.set_status_text(('%s(%s)' % (const.user_name, client_type[int(const.user_type)]), '客户信息'))
+                self.panel_manager.message.status_frame.set_status_text(('%s(%s)' % (const.user_name, client_type[int(const.user_type)]), '消息中心'))
+                self.panel_manager.applys.status_frame.set_status_text(('%s(%s)' % (const.user_name, client_type[int(const.user_type)]), '放款申请'))
                 self.panel_manager.switch_panel(self, 'message')
             else:
                 self.password.set('')

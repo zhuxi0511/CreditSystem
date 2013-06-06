@@ -113,7 +113,8 @@ class Status(Frame):
         self.people_button['command'] = None
         
     def create_status_text(self):
-        self.status_text_label = Label(self, text='当前用户>%s 当前>%s' % (const.user_name, const.panel_type), width=80)
+        client_type = ['', '信贷员', '主管', '副行长', '行长']
+        self.status_text_label = Label(self, text='当前用户>%s 当前>%s' % ('%s(%s)' % (const.user_name, client_type[int(const.user_type)] if const.user_type else None), const.panel_type), width=80)
         self.status_text_label['anchor'] = 'e'
     
     def set_status_text(self, text_tuple):
