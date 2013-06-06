@@ -18,7 +18,7 @@ class People(Show_style):
         self.people_list_frame.pack(pady=15, ipady=5)
 
 class PeopleList(Frame):
-    def __init__(self, master=None, title='', items=(('客户名称',40),('机构类型',10),('国别', 10),('营业执照编号',20),('注册资本',10)), next_func=None):
+    def __init__(self, master=None, title='', items=(('客户名称',36),('机构类型',10),('国别', 10),('营业执照编号',20),('注册资本',10)), next_func=None):
         Frame.__init__(self, master, relief=Tkinter.GROOVE )
         self.mutilistbox_items = items
         self.next_func = next_func

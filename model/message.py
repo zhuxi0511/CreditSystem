@@ -21,7 +21,7 @@ class Message(Show_style):
 
     def create_main_frame(self):
         self.main_labelframe = LabelFrame(self, text='消息中心')
-        self.main_list_item = (('业务编号',10),('客户编号',8),('客户名称',20),('发放日',10),('到期日',10),('贷款金额',5),('产品名称',10),('期限', 5),('利率',10), ('申请状态', 16))
+        self.main_list_item = (('业务编号',10),('客户编号',8),('客户名称',20),('发放日',10),('到期日',10),('贷款金额',5),('产品名称',10),('期限', 5),('利率',8), ('申请状态', 14))
         self.main_list = MultiListbox(self.main_labelframe, self.main_list_item, height=22)
         self.main_list.grid(padx=10, pady=10, row=0, column=0)
 
@@ -40,7 +40,12 @@ class Message(Show_style):
         if not now:
             return None
         else:
-            return const.apply_information_list[int(now[0])]
+            print 'now', self.main_list.get(now)
+            number = self.main_list.get(now)[0]
+            #return const.apply_information_list[int(now[0])]
+            for apply_information in const.apply_information_list:
+                if apply_information[15] == number:
+                    return apply_information
 
     def refresh_mutilistbox(self):
         self.main_list.delete(0, self.main_list.size())
@@ -65,6 +70,7 @@ class Message(Show_style):
 
 class ApplyInformationToplevel(Toplevel):
     def __init__(self, master, apply_information, title='申请业务详情'):
+        print 'apply_information', apply_information
         Toplevel.__init__(self)
         self.master = master
         self.apply_information = apply_information
