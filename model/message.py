@@ -86,6 +86,7 @@ class ApplyInformationToplevel(Toplevel):
             self.submit_apply_button = Button(self, text='通过并提交上级审核')
         else:
             self.submit_apply_button = Button(self, text='通过审核')
+        self.submit_apply_button['state'] = 'disable'
         def submit_apply_func():
             tmp = deepcopy(self.apply_information)
             tmp[-1] = str(int(self.apply_information[-1])+1)
@@ -96,15 +97,19 @@ class ApplyInformationToplevel(Toplevel):
         self.submit_apply_button['command'] = submit_apply_func
         self.confirm_button = Button(self, text='确认')
         self.confirm_button['command'] = self.destroy
+        self.print_apply_sheet = Button(self, text='打印借据')
+        self.print_apply_sheet['state'] = 'disable'
 
     def pack_all(self):
-        self.apply_state_label.grid(pady=20, row=0, column=0, columnspan=2)
-        self.apply_sheet_frame.grid(pady=5, padx=20, row=1, column=0, columnspan=2)
+        self.apply_state_label.grid(pady=20, row=0, column=0, columnspan=3)
+        self.apply_sheet_frame.grid(pady=5, padx=20, row=1, column=0, columnspan=3)
+        self.submit_apply_button.grid(pady=5, row=2, column=0)
+        self.confirm_button.grid(pady=10, row=2, column=1)
+        self.print_apply_sheet.grid(pady=10, row=2, column=2)
         if '等待当前用户审核' == self.get_state():
-            self.submit_apply_button.grid(pady=5, row=2, column=0)
-            self.confirm_button.grid(pady=10, row=2, column=1)
-        else:
-            self.confirm_button.grid(pady=10, row=2, column=0, columnspan=2)
+            self.submit_apply_button['state'] = 'normal'
+        if '审核通过' == self.get_state():
+            self.print_apply_sheet['state'] = 'normal'
 
     def get_state(self):
         ret = None
